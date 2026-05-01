@@ -1,0 +1,1076 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Fasilkom Assistant</title>
+
+<style>
+body {
+    body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #eef2ff, #e0e7ff);
+    overflow-x: hidden;   
+} 
+}
+
+/* ===== SPLASH ===== */
+#splash {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #4f46e5, #6a5acd);
+    z-index: 9999;
+}
+
+/* CENTER ABSOLUT */
+.splash-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.logo-robot {
+    width: 100px;
+    display: block;
+    margin: 0 auto;
+}
+
+.loader {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(255,255,255,0.3);
+    border-top: 4px solid white;
+    border-radius: 50%;
+    margin: 20px auto;
+    animation: spin 1s linear infinite;
+}
+
+/* ===== LOGIN ===== */
+#loginPage {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: #eef2ff;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9998;
+}
+
+.login-box {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    width: 250px;
+}
+
+.logo-login {
+    width: 90px;
+    margin-bottom: 10px;
+}
+
+.login-box input {
+    width: 90%;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    margin-top: 10px;
+}
+
+.login-box button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 10px;
+    background: #6a5acd;
+    color: white;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ===== KODE ASLI KAMU ===== */
+.sidebar {
+    width: 250px;
+    background: white;
+    padding: 20px;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.05);
+    position: fixed;
+    height: 100%;
+    left: 0;
+    top: 0;
+}
+
+.sidebar h2 { font-size: 18px; }
+
+.menu {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #555;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.menu a:hover { background: #eef2ff; }
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+    margin-left: 270px;
+}
+
+.header {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.robot-wrapper {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    margin: 0 auto 20px;
+}
+
+.circle {
+    width: 220px;
+    height: 220px;
+    background: radial-gradient(circle, #dbeafe, #bfdbfe);
+    border-radius: 50%;
+    position: absolute;
+    box-shadow: 0 0 40px rgba(59,130,246,0.3);
+}
+
+.robot {
+    width: 180px;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.header h2 { margin: 0; }
+.header p { color: gray; }
+
+.chat-box {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.message {
+    max-width: 75%;
+    padding: 15px;
+    border-radius: 15px;
+    line-height: 1.6;
+}
+
+.bot {
+    background: white;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    align-self: flex-start;
+}
+
+.user {
+    background: linear-gradient(135deg, #6a5acd, #7f7fff);
+    color: white;
+    align-self: flex-end;
+}
+
+.label { font-size: 12px; color: gray; }
+
+.quick {
+    display: flex;
+    overflow-x: auto;
+    gap: 10px;
+    padding: 10px 5px;
+    scroll-snap-type: x mandatory;
+}
+
+.quick::-webkit-scrollbar {
+    display: none;
+}
+
+.quick button {
+    flex: 0 0 auto;
+    white-space: nowrap;
+    scroll-snap-align: start;
+}
+
+.quick {
+    border-radius: 15px;
+    background: transparent;
+}
+
+.quick button:hover {
+    background: #6a5acd;
+    color: white;
+}
+
+.input-box {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    display: flex;
+    gap: 10px;
+
+    padding: 10px 15px;
+    background: #eef2ff;
+
+    z-index: 999;
+}
+
+.chat-box {
+    padding-bottom: 80px;
+}
+
+.input-box {
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.05);
+}
+
+.input-box input {
+    flex: 1;
+    padding: 12px;
+    border-radius: 20px;
+    border: 1px solid #ddd;
+    background: white;
+}
+
+.input-box button {
+    margin-left: 10px;
+    padding: 12px 18px;
+    border-radius: 20px;
+    border: none;
+    background: #6a5acd;
+    color: white;
+}
+
+/* ===== TAMBAHAN AGAR CHAT AWAL CENTER ===== */
+.chat-box > div:first-child {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.chat-box > div:first-child .message {
+    align-self: center;
+    text-align: center;
+}
+
+/* 🔥 TAMBAHAN: STYLE STRUKTUR DOSEN */
+.struktur-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* 🔥 AGAR MENYATU DENGAN CHAT */
+.struktur-container {
+    margin-top: 5px;
+}
+
+.struktur-card {
+    background: #f8fafc;
+    border-radius: 12px;
+    padding: 12px;
+}
+
+.struktur-card {
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 0 5px 12px rgba(0,0,0,0.1);
+}
+
+.struktur-jabatan {
+    font-weight: bold;
+    color: #6a5acd;
+    margin-bottom: 5px;
+}
+
+.struktur-nama {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.struktur-gelar {
+    font-size: 13px;
+    color: gray;
+}
+
+/* ===== FIX ANDROID / HP ===== */
+@media (max-width: 768px){
+
+    .sidebar{
+        display: none;
+    }
+
+    .container{
+        margin-left: 0;
+        padding: 15px;
+    }
+
+    .robot-wrapper{
+        width: 160px;
+        height: 160px;
+    }
+
+    .circle{
+        width: 160px;
+        height: 160px;
+    }
+
+    .robot{
+        width: 130px;
+        top: 15px;
+        left: 15px;
+    }
+
+    .message{
+        max-width: 90%;
+        font-size: 14px;
+    }
+
+    .quick{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .quick button{
+        width: 90%;
+    }
+
+    .input-box{
+        position: fixed;
+        bottom: 10px;
+        left: 10px;
+        right: 10px;
+        background: transparent;
+    }
+
+    .chat-box{
+        padding-bottom: 80px;
+    }
+}
+</style>
+
+</head>
+<body>
+
+<!-- SPLASH -->
+<div id="splash">
+    <div class="splash-content">
+        <img src="logo unpra.jpeg" class="logo-robot">
+        <h2> Informasi Fakultas Ilmu Komputer Universitas Prabumulih</h2>
+        <div class="loader"></div>
+    </div>
+</div>
+
+<!-- LOGIN -->
+<div id="loginPage">
+    <div class="login-box">
+        <img src="logo unpra.jpeg" class="logo-login">
+        <h2>Masukkan Nama</h2>
+        <input type="text" id="username" placeholder="Nama kamu...">
+        <button onclick="login()">Masuk</button>
+    </div>
+</div>
+
+<!-- ===== KODE ASLI KAMU ===== -->
+<div class="container">
+
+    <div class="header">
+        <div class="robot-wrapper">
+            <div class="circle"></div>
+            <img class="robot" src="logo unpra.jpeg">
+        </div>
+
+        <h2>Hai👋</h2>
+        <p>Saya ChatBot, AI Assistant kamu.<br>
+        Ada yang bisa saya bantu hari ini?</p>
+    </div>
+
+    <div class="chat-box" id="chat">
+
+        <div>
+            <div class="label">Chatbot</div>
+            <div class="message bot">
+                Halo! Saya chatbot Fasilkom 😊<br>
+                Silakan pilih menu atau tanyakan langsung.
+            </div>
+
+        </div>
+
+       <div class="quick">
+    <!-- DOSEN -->
+    <button onclick="pilih('dosen IF')">👨‍🏫 Dosen IF</button>
+    <button onclick="pilih('dosen SI')">👨‍🏫 Dosen SI</button>
+    <button onclick="pilih('dosen KA')">👨‍🏫 Dosen KA</button>
+
+    <!-- UKT & PENDAFTARAN -->
+    <button onclick="pilih('ukt')">💰 UKT</button>
+    <button onclick="pilih('pendaftaran')">📝 Pendaftaran</button>
+
+    <!-- AKREDITASI -->
+    <button onclick="pilih('akreditasi IF')">🏆 Akreditasi IF</button>
+    <button onclick="pilih('akreditasi SI')">🏆 Akreditasi SI</button>
+    <button onclick="pilih('akreditasi KA')">🏆 Akreditasi KA</button>
+
+    <!-- HIMPUNAN -->
+    <button onclick="pilih('himaif')">👥 HIMAIF</button>
+    <button onclick="pilih('himasif')">👥 HIMASIF</button>
+    <button onclick="pilih('himaka')">👥 HIMAKA</button>
+
+    <!-- VISI -->
+    <button onclick="pilih('visi IF')">🎯 Visi IF</button>
+
+    <!-- MISI -->
+    <button onclick="pilih('misi IF')">🎯 Misi IF</button>
+
+    <!-- PROFIL -->
+    <button onclick="pilih('profil fasilkom')">📄 Profil Fasilkom</button>
+    <button onclick="pilih('struktur dosen')">🏫 Struktur Dosen</button>
+
+</div>
+
+<div>
+   <div class="input-box">
+        <input type="text" id="input" placeholder="Tulis pertanyaan...">
+        <button onclick="kirim()">Kirim</button>
+    </div>
+</div>
+
+</div>
+
+    </div>
+
+</div>
+
+<script>
+
+// SPLASH → LOGIN (TIDAK MENGGANGGU SCRIPT KAMU)
+setTimeout(() => {
+    document.getElementById("splash").style.display = "none";
+    document.getElementById("loginPage").style.display = "flex";
+}, 2000);
+
+// LOGIN
+function login(){
+    let username = document.getElementById("username").value;
+
+    if(username === ""){
+        alert("Masukkan nama dulu!");
+        return;
+    }
+
+    document.getElementById("loginPage").style.display = "none";
+
+    document.querySelector(".header h2").innerText = "Hai " + username + " 👋";
+}
+
+    // 🔥 NORMALISASI BIAR CERDAS
+function bersih(text){
+    return text.toLowerCase().replace(/[^\w\s]/gi, "").trim();
+}
+
+function tambah(text, type){
+    let chat = document.getElementById("chat");
+    let label = type === "user" ? "Anda" : "Chatbot";
+
+    chat.innerHTML += `
+    <div>
+        <div class="label">${label}</div>
+        <div class="message ${type}">
+            ${text}
+        </div>
+    </div>
+    `;
+
+    chat.scrollTop = chat.scrollHeight;
+    
+}
+
+function jawab(p){
+    p = bersih(p);
+
+    // 🔥 PRIORITAS VISI MISI (WAJIB DI ATAS)
+if(p.includes("visi misi") || p.includes("visi dan misi")){
+    return `
+<b>Visi</b><br>
+Menjadi Program Studi yang Berkompetensi di bidang informatika pada tingkat nasional tahun 2034
+<br><br>
+<b>Misi</b><br>
+1. Melaksanakan dan mengembangkan Pendidikan Tinggi yang berkualitas dan profesional;<br>
+2. Membangun suasana akademik yang kondusif;<br>
+3. Menumbuhkan jiwa entrepreneur;<br>
+4. Meningkatkan pemahaman teknologi informasi;<br>
+5. Melaksanakan penelitian;<br>
+6. Melaksanakan pengabdian kepada masyarakat.
+    `;
+}
+
+if(p.includes("visi")){
+    return `
+<b>🎯 Visi Informatika</b><br><br>
+Menjadi Program Studi yang Berkompetensi di bidang informatika pada tingkat nasional tahun 2034
+    `;
+}
+
+if(p.includes("misi")){
+    return `
+<b>🎯 Misi Informatika</b><br><br>
+1. Melaksanakan dan mengembangkan Pendidikan Tinggi yang berkualitas dan profesional;<br>
+2. Membangun suasana akademik yang kondusif;<br>
+3. Menumbuhkan jiwa entrepreneur;<br>
+4. Meningkatkan pemahaman teknologi informasi;<br>
+5. Melaksanakan penelitian;<br>
+6. Melaksanakan pengabdian kepada masyarakat.
+    `;
+}
+
+    // 🔥 FIX: PRIORITAS STRUKTUR DOSEN (WAJIB DI ATAS)
+if(
+    p.includes("struktur dosen") ||
+    p.includes("struktur fasilkom") ||
+    p.includes("jabatan dosen")
+){
+    return `
+<div class="struktur-container">
+
+<div class="struktur-card">
+<div class="struktur-jabatan">🏫 Dekan Fakultas Ilmu Komputer</div>
+<div class="struktur-nama">KHANA WIJAYA</div>
+<div class="struktur-gelar">S.KOM., M.KOM</div>
+</div>
+
+<div class="struktur-card">
+<div class="struktur-jabatan">💰 Wakil Dekan Keuangan</div>
+<div class="struktur-nama">SUHARTINI</div>
+<div class="struktur-gelar">S.KOM., M.KOM</div>
+</div>
+
+<div class="struktur-card">
+<div class="struktur-jabatan">🎓 Wakil Dekan Kemahasiswaan</div>
+<div class="struktur-nama">AINI HUTAGALUNG</div>
+<div class="struktur-gelar">S.KOM., M.KOM</div>
+</div>
+
+
+
+<div class="struktur-card">
+<div class="struktur-jabatan">💻 Kaprodi Informatika</div>
+<div class="struktur-nama">IWAN SETIAWAN</div>
+<div class="struktur-gelar">S.KOM., M.KOM</div>
+</div>
+
+<div class="struktur-card">
+<div class="struktur-jabatan">📊 Kaprodi Sistem Informasi</div>
+<div class="struktur-nama">YUNTARI PURBASARI</div>
+<div class="struktur-gelar">S.KOM., M.KOM</div>
+</div>
+
+<div class="struktur-card">
+<div class="struktur-jabatan">💼 Kaprodi Komputerisasi Akuntansi</div>
+<div class="struktur-nama">JEPRI YANDI</div>
+<div class="struktur-gelar">S.KOM., M.KOM</div>
+</div>
+
+</div>
+    `;
+}
+
+    // 🔥 TAMBAHAN: ngerti pertanyaan manusia (keunggulan)
+   let tanyaKeunggulan =
+    p.includes("keunggulan") ||
+    p.includes("kelebihan") ||
+    p.includes("kenapa") ||
+    p.includes("alasan");
+
+// =======================
+// 🔥 INFORMATIKA
+// =======================
+if(
+    tanyaKeunggulan &&
+    (p.includes("informatika"))
+){
+    return `
+<b>✨ Keunggulan Kuliah Jurusan Informatika</b><br><br>
+
+Kuliah di jurusan Informatika menawarkan keunggulan utama berupa prospek kerja luas dengan gaji tinggi, keahlian teknis yang sangat dibutuhkan di era digital (programming, AI, data science), dan fleksibilitas karier. Mahasiswa dilatih berpikir logis untuk menciptakan inovasi teknologi, membangun software, serta membuka peluang wirausaha di bidang kreatif dan teknologi.<br><br>
+
+<b>💡 Poin Keunggulan:</b><br><br>
+
+* Menguasai Keahlian Future-Proof: Mahasiswa mempelajari teknologi terkini seperti artificial intelligence (AI), big data, cloud computing, dan keamanan siber.<br>
+
+* Kemampuan Membuat Sistem dan Software: Mampu membangun website, aplikasi mobile, dan sistem kompleks.<br>
+
+* Fleksibilitas Kerja (Remote/Freelance): Bisa kerja dari mana saja dengan peluang penghasilan tinggi.<br>
+
+* Peluang Berwirausaha Digital: Bisa membuat startup atau bisnis teknologi sendiri.
+        `;
+    }
+
+
+// =======================
+// 🔥 SISTEM INFORMASI
+// =======================
+if(
+    tanyaKeunggulan &&
+    (p.includes("sistem informasi"))
+){
+    return `
+<b>📊 Keunggulan Sistem Informasi</b><br><br>
+Jurusan Sistem Informasi memiliki keunggulan dalam menggabungkan teknologi dan bisnis. Mahasiswa mempelajari pengelolaan sistem, analisis kebutuhan perusahaan, serta pengambilan keputusan berbasis data. Lulusannya dibutuhkan sebagai analis sistem, IT consultant, dan manajer sistem informasi.<br>
+Kuliah di Program Studi Sistem Informasi di Prabumulih, khususnya di Universitas Prabumulih (UNPRA), menawarkan berbagai keunggulan strategis bagi mahasiswa yang ingin berkarir di bidang teknologi dan bisnis.<br><br>
+Berikut adalah keunggulan utamanya:<br>
+* Integrasi Ilmu Komputer dan Bisnis: Kurikulum Sistem Informasi UNPRA menggabungkan ilmu komputer, manajemen, dan bisnis. Mahasiswa tidak hanya belajar coding, tetapi juga cara menganalisis dan membangun sistem yang bernilai tambah bagi perusahaan.<br>
+* Kurikulum Berbasis Teknologi Terkini: Pembelajaran fokus pada teknologi digital mutakhir, data, dan AI, yang sangat relevan dengan kebutuhan industri saat ini.<br>
+* Fleksibilitas Belajar (Blended Learning): UNPRA menyediakan metode kuliah blended learning yang fleksibel, memudahkan mahasiswa untuk belajar di tengah kesibukan lain.<br>
+* Fasilitas Pembelajaran Digital: Didukung oleh sistem pembelajaran berbasis digital melalui SEVIMA, yang meningkatkan efisiensi dan aksesibilitas akademik.<br>
+* Peluang Karir Luas & Menjanjikan: Lulusan memiliki peluang kerja tinggi sebagai System Analyst, IT Manager, Web Developer, atau Data Scientist.<br>
+* Keahlian Aplikatif: Keahlian yang diajarkan sangat aplikatif, seperti desain web dan manajemen sistem, sehingga lulusan mudah beradaptasi di dunia kerja.
+    `;
+}
+
+// =======================
+// 🔥 KOMPUTERISASI AKUNTANSI
+// =======================
+if(
+    tanyaKeunggulan &&
+    (p.includes("komputerisasi akuntansi") || p.includes("akuntansi komputer") || p.includes("ka"))
+){
+    return `
+<b>💼 Keunggulan Komputerisasi Akuntansi</b><br><br>
+Jurusan ini menggabungkan akuntansi dan teknologi. Mahasiswa dibekali kemampuan mengelola keuangan menggunakan sistem komputer, membuat laporan keuangan digital, serta memahami software akuntansi. Lulusannya dibutuhkan di perusahaan, perbankan, dan bidang keuangan lainnya.<br>
+Kuliah di Program Studi (Prodi) D3 Komputerisasi Akuntansi Universitas Prabumulih (UNPRA) menawarkan berbagai keunggulan, terutama dalam menggabungkan keahlian akuntansi dengan teknologi informasi yang relevan di era digital.<br>
+Berikut adalah beberapa keunggulan utama Komputerisasi Akuntansi Universitas Prabumulih:<br>
+* Kurikulum Berimbang (Akuntansi & Teknologi): Mahasiswa tidak hanya belajar pencatatan keuangan konvensional, tetapi mendalami penggunaan software akuntansi untuk mengelola, mengotomatisasi, dan menganalisis data keuangan secara efisien.<br>
+* Keahlian Praktis di Era Digital: Materi yang diajarkan mencakup logika dan algoritma, perancangan sistem informasi akuntansi, serta penguasaan software akuntansi (seperti Accurate, MYOB, dll) yang sangat dibutuhkan perusahaan saat ini.<br>
+* Lulusan Siap Kerja (Vokasi): Sebagai program D3, kurikulum fokus pada praktik yang membuat lulusannya lebih siap terjun ke dunia kerja sebagai teknisi akuntansi, accounting clerk, finansial clerk, atau administrator database keuangan.<br>
+* Prospek Kerja Luas: Keahlian ganda (Akuntansi + IT) membuat lulusan sangat dicari di berbagai industri, baik di perusahaan swasta, instansi pemerintahan, maupun membuka usaha jasa pembukuan sendiri.<br>
+* Didukung Fakultas Ilmu Komputer: Dengan berkolaborasi bersama Fakultas Ilmu Komputer UNPRA, kualitas pengajaran teknologi dalam akuntansi terjaga dengan baik.
+    `;
+}
+
+    // 🔥 TAMBAHAN: ngerti pertanyaan kerja setelah lulus
+if(p.includes("kerja") || p.includes("pekerjaan") || p.includes("karier") || p.includes("lulusan")){
+    if(p.includes("informatika") || p.includes("prodi")){
+        return `
+<b>🎓 Peluang Karier Lulusan Informatika</b><br><br>
+
+Lulusan Informatika (S1) memiliki peluang karier yang sangat luas sebagai ahli teknologi, seperti Software Engineer, Data Scientist, Cyber Security Specialist, DevOps, atau Game Developer. Mereka dapat bekerja di berbagai sektor, termasuk perusahaan teknologi (startup), BUMN, perbankan, instansi pemerintah, dan sebagai konsultan IT.<br><br>
+
+<b>💼 Profesi/Posisi yang Bisa Diambil:</b><br><br>
+
+* Software Engineer/Developer: Membangun aplikasi berbasis web, mobile, atau desktop (Front-end/Back-end).<br><br>
+* Data Scientist/Analyst: Mengolah dan menganalisis data besar untuk kebutuhan bisnis.<br><br>
+* Cyber Security Specialist: Melindungi sistem dan data perusahaan dari serangan siber.<br><br>
+* DevOps/System Administrator: Mengelola infrastruktur IT, server, dan cloud computing.<br><br>
+* AI/Machine Learning Engineer: Mengembangkan teknologi berbasis kecerdasan buatan.<br><br>
+* IT Consultant/Project Manager: Merencanakan dan mengawasi implementasi proyek teknologi.<br><br>
+* Game Developer: Merancang dan memprogram permainan digital.<br><br>
+
+<b>🏢 Tempat Kerja (Industri):</b><br><br>
+
+* Perusahaan Teknologi & Startup: Seperti Gojek, Tokopedia, Bukalapak, Traveloka.<br><br>
+* Perusahaan BUMN & Perbankan: PT Telkom, Bank BRI, Bank BNI, Pertamina, Sucofindo.<br><br>
+* Instansi Pemerintah: Kementerian Kominfo, Badan Siber dan Sandi Negara (BSSN), dinas IT pemerintah daerah.<br><br>
+* Perusahaan Multinasional & Konsultan: IBM, Microsoft, Google, Accenture.<br><br>
+* Industri Kesehatan, Ritel, & Pendidikan: Rumah sakit, perusahaan ritel, atau universitas.<br><br>
+* Wirausaha/Freelance: Membangun perusahaan rintisan sendiri (technopreneur) atau bekerja lepas.<br><br>
+
+<b>💰 Kisaran Gaji:</b><br><br>
+
+Lulusan Informatika saat ini sangat dibutuhkan karena hampir semua sektor bisnis mengalami transformasi digital, dengan kisaran gaji entry-level yang menjanjikan, seringkali mencapai Rp7 juta - Rp15 juta di industri startup atau perbankan.
+        `;
+    }
+}
+
+// 🔥 TAMBAHAN: kerja Sistem Informasi
+if(p.includes("kerja") || p.includes("pekerjaan") || p.includes("karier") || p.includes("lulusan")){
+    if(p.includes("sistem informasi")){
+        return `
+<b>🎓 Peluang Karier Lulusan Sistem Informasi</b><br><br>
+
+Lulusan Sistem Informasi memiliki peluang karier luas di bidang teknologi dan bisnis. Mereka berperan sebagai penghubung antara kebutuhan bisnis dan solusi teknologi, sehingga sangat dibutuhkan di berbagai perusahaan.<br><br>
+
+<b>💼 Profesi/Posisi yang Bisa Diambil:</b><br><br>
+
+* System Analyst: Menganalisis kebutuhan sistem dalam perusahaan.<br>
+* IT Consultant: Memberikan solusi teknologi untuk bisnis.<br>
+* Web Developer: Membangun website dan sistem berbasis web.<br>
+* Database Administrator: Mengelola data perusahaan.<br>
+* Business Analyst: Menganalisis proses bisnis dan meningkatkan efisiensi.<br>
+* Project Manager IT: Mengelola proyek teknologi informasi.<br><br>
+
+<b>🏢 Tempat Kerja (Industri):</b><br><br>
+
+* Perusahaan swasta dan startup<br>
+* Perbankan dan BUMN<br>
+* Instansi pemerintah<br>
+* Konsultan IT dan perusahaan teknologi<br><br>
+
+<b>💰 Kisaran Gaji:</b><br><br>
+
+Gaji lulusan Sistem Informasi cukup menjanjikan, dengan kisaran entry-level sekitar Rp5 juta - Rp12 juta tergantung perusahaan dan posisi.
+        `;
+    }
+}
+
+// 🔥 TAMBAHAN: kerja Komputerisasi Akuntansi
+if(p.includes("kerja") || p.includes("pekerjaan") || p.includes("karier") || p.includes("lulusan")){
+    if(
+        p.includes("komputerisasi akuntansi") ||
+        p.includes("akuntansi komputer") 
+    ){
+        return `
+<b>🎓 Peluang Karier Lulusan Komputerisasi Akuntansi</b><br><br>
+
+Lulusan Komputerisasi Akuntansi memiliki peluang kerja yang luas di bidang keuangan dan administrasi berbasis teknologi. Mereka menguasai akuntansi sekaligus penggunaan sistem komputer dan software keuangan.<br><br>
+
+<b>💼 Profesi/Posisi yang Bisa Diambil:</b><br><br>
+
+* Accounting Staff: Mengelola laporan keuangan perusahaan.<br>
+* Finance Staff: Mengatur pemasukan dan pengeluaran perusahaan.<br>
+* Admin Keuangan: Menginput dan mengelola data keuangan.<br>
+* Staff Perbankan: Bekerja di bank sebagai teller atau administrasi.<br>
+* Auditor: Memeriksa laporan keuangan perusahaan.<br>
+* Operator Software Akuntansi: Menggunakan aplikasi seperti Accurate & MYOB.<br>
+
+<b>🏢 Tempat Kerja (Industri):</b><br>
+
+* Perusahaan swasta & industri<br>
+* Perbankan & lembaga keuangan<br>
+* Instansi pemerintah<br>
+* Kantor akuntan publik<br><br>
+
+<b>💰 Kisaran Gaji:</b><br>
+
+Gaji lulusan Komputerisasi Akuntansi cukup stabil dengan kisaran entry-level sekitar Rp4 juta - Rp8 juta tergantung perusahaan dan posisi.
+        `;
+    }
+}
+
+ if(p.includes("dosen informatika")){
+        return `
+<b>👨‍🏫 Dosen Informatika:</b><br><br>
+* IWAN SETIAWAN, S.KOM., M.KOM <br>
+* KHANA WIJAYA, S.KOM., M.KOM <br>
+* HERMIZAHADIWIDASTRA, S.KOM., M.KOM <br>
+* NUR AINI HUTAGALUNG, S.KOM., M.KOM <br>
+* RIZA KARTINA, S.KOM., M.KOM<br>
+* TOMMY SAPUTRA, S.KOM., M.KOM
+        `;
+    }
+
+    if(p.includes("dosen komputerisasi akuntansi")){
+        return `
+<b>👨‍🏫 Dosen Komputerisasi Akuntansi:</b><br><br>
+* MUCHLIS, S.KOM., M.SI<br>
+* JEPRI YANDI, S.KOM., M.KOM<br>
+* HEPNYI SAMOSIR, S.PD., M.PD<br>
+* SRI NURFATIDAH, S.S., M.M<br>
+* DR. RISHI SUPARIANTO, S.H., M.H<br>
+* YENI YULIANA, S.SOS.I., M.PDI<br>
+        `;
+    }
+
+    if(p.includes("dosen sistem informasi")){
+        return `
+<b>👨‍🏫 Dosen Sistem Informasi:</b><br><br>
+* FAJRIYAH, S.KOM., M.KOM<br>
+* ANDI CHRISTIAN, S.KOM., M.KOM<br>
+* ARIANSYAH, S.KOM., M.KOM<br>
+* YUNTARI PURBASARI, S.KOM., M.KOM<br>
+* SUHARTINI, S.KOM., M.KOM<br>
+        `;
+    }
+
+   // 🔥 LOGIKA BARU SESUAI QUICK MENU (SUDAH DIPERBAIKI)
+if(
+    p.includes("informatika") ||
+    p.includes("dosen if") ||
+    p.includes("akreditasi if") ||
+    p.includes("visi if") ||
+    p.includes("visi iformatika") ||
+    p.includes("misi if") ||
+
+    p.includes("komputerisasi akuntansi") ||
+    p.includes("dosen komputerisasi akuntansi") ||
+    p.includes("dosen ka") ||
+    p.includes("akreditasi ka") ||
+   
+    p.includes("sistem informasi") ||
+    p.includes("dosen si") ||
+    p.includes("akreditasi si") ||
+    
+    p.includes("struktur fasilkom") 
+
+){
+
+    // ================= DOSEN =================
+    if(p.includes("dosen if")){
+        return jawab("dosen informatika");
+    }
+
+    if(p.includes("dosen ka")){
+        return jawab("dosen komputerisasi akuntansi");
+    }
+
+    if(p.includes("dosen si")){
+    return jawab("dosen sistem informasi");
+}
+
+    // ================= UKT =================
+    if(p.includes("biaya") || p.includes("ukt")){
+        return jawab("ukt");
+    }
+
+    // ================= PENDAFTARAN =================
+    if(p.includes("daftar") || p.includes("pendaftaran")){
+        return jawab("pendaftaran");
+    }
+
+    // ================= AKREDITASI =================
+   // 🔥 AKREDITASI PER PRODI (WAJIB DI ATAS)
+if(p.includes("akreditasi if")){
+    return "🏆 Akreditasi Informatika: Baik";
+}
+
+if(p.includes("akreditasi si")){
+    return "🏆 Akreditasi Sistem Informasi: Baik Sekali";
+}
+
+if(p.includes("akreditasi ka")){
+    return "🏆 Akreditasi Komputerisasi Akuntansi: Baik Sekali";
+}
+    // ================= HIMPUNAN =================
+    if(p.includes("himaif")){
+        return jawab("himaif");
+    }
+
+    if(p.includes("himasif")){
+        return jawab("himasif");
+    }
+
+    if(p.includes("himaka")){
+        return jawab("himaka");
+    }
+
+    // ================= VISI =================
+    if(p.includes("visi if") || p.includes("visi iformatika")){
+        return jawab("visi IF");
+    }
+
+
+
+    // ================= MISI =================
+    if(p.includes("misi if") || p.includes("misi informatika")){
+        return jawab("misi IF");
+    }
+
+   
+
+    // ================= PROFIL =================
+    if(p.includes("profil")){
+        return jawab("profil fasilkom");
+    }
+
+    return "Silakan pilih menu yang tersedia 😊";
+}
+
+   
+
+    if(p.includes("ukt") || p.includes("biaya") || p.includes("informatika") || p.includes("sistem informasi") || p.includes("komputerisasi akuntansi")){
+        return `
+<b>💰 Informasi UKT Fakultas Ilmu Komputer</b><br><br>
+Rp 2.300.000 – Rp 2.500.000 per semester
+        `;
+    }
+
+    if(p.includes("pendaftaran") || p.includes("daftar") || p.includes("pmb") || p.includes("pembukaan")){
+        return `
+<b>📝 Informasi Pendaftaran</b><br><br>
+
+GELOMBANG 1 <br>
+maret - mei 2026<br><br>
+
+GELOMBANG 2<br>
+mei - juni 2026<br><br>
+
+GELOMBANG 3<br>
+juni - juli 2026<br><br>
+
+GELOMBANG 4<br>
+juli - agustus 2026<br><br>
+
+<a href="https://pmb.unpra.ac.id" target="_blank">
+https://pmb.unpra.ac.id
+</a>
+        `;
+    }
+
+   
+    if(p.includes("himaif") || p.includes("himpunan") || p.includes("organisasi")){
+        return `
+👥Himpunan Mahasiswa Informatika Universitas Prabumulih
+
+Himpunan Mahasiswa Informatika (biasanya disingkat HIMAIF) adalah organisasi kemahasiswaan di tingkat program studi Informatika yang berada di lingkungan Universitas Prabumulih. Organisasi ini menjadi wadah bagi mahasiswa untuk berkembang, baik secara akademik maupun non-akademik.<br><br>
+
+
+HIMAIF merupakan organisasi internal kampus yang beranggotakan mahasiswa program studi Informatika. Tujuannya adalah:<br>
+* Menyalurkan aspirasi mahasiswa<br>
+* Mengembangkan kemampuan soft skill dan hard skill<br>
+* Menjadi jembatan antara mahasiswa dan pihak kampus<br><br>
+
+
+Secara umum, Himpunan Mahasiswa Informatika memiliki beberapa peran penting:
+
+* Wadah pengembangan diri (kepemimpinan, komunikasi, kerja tim)<br>
+* Penggerak kegiatan akademik seperti seminar IT, workshop coding, dll<br>
+* Media informasi antar mahasiswa dan dosen<br>
+* Membangun solidaritas antar mahasiswa informatika<br><br>
+
+
+✨ Manfaat Bergabung di HIMAIF
+
+
+* Pengalaman organisasi (penting untuk dunia kerja)<br>
+* Relasi/pertemanan luas<br>
+* Skill tambahan di bidang IT dan non-ITM<br>
+* Sertifikat kegiatan dan pengalaman event<br>
+        `;
+    }
+
+    if(p.includes("himasif") || p.includes("himpunan sistem informasi") || p.includes("organisasi sistem informasi")){
+        return `
+👥Himpunan Mahasiswa Sistem Informasi Universitas Prabumulih<br>
+Himpunan Mahasiswa Sistem Informasi (HIMASIF) adalah organisasi kemahasiswaan di tingkat program studi Sistem Informasi.<br><br>
+
+Tujuan:<br>
+• Wadah aspirasi mahasiswa<br>
+• Mengembangkan soft skill & hard skill<br>
+• Menjadi penghubung mahasiswa dan kampus<br><br>
+
+
+Peran:<br>
+• Seminar & workshop IT<br>
+• Media informasi mahasiswa<br>
+• Meningkatkan solidaritas<br><br>
+
+Manfaat:<br>
+• Pengalaman organisasi<br>
+• Relasi luas<br>
+• Skill tambahan<br>
+• Sertifikat kegiatan<br>
+        `;
+    }
+
+    if(p.includes("himaka") || p.includes("himpunan komputerisasi akuntansi") || p.includes("organisasi komputerisasi akuntansi")){
+        return `
+👥Himpunan Mahasiswa Komputerisasi Akuntansi Universitas Prabumulih<br>
+Komputerisasi Akuntansi adalah jurusan yang menggabungkan akuntansi dengan teknologi informasi.<br><br>
+
+Materi:<br>
+• Akuntansi<br>
+• Sistem informasi akuntansi<br>
+• Software akuntansi (Accurate, MYOB)<br>
+• Perpajakan<br><br>
+
+
+Prospek kerja:<br>
+• Accounting Staff<br>
+• Finance<br>
+• Admin Keuangan<br>
+• Perbankan<br><br>
+
+Keunggulan:<br>
+• Skill akuntansi + IT<br>
+• Siap kerja<br>
+• Banyak dibutuhkan perusahaan<br>
+        `;
+    }
+ p = p.toLowerCase().trim();
+
+
+// 🔥 PRIORITAS 1: PROFIL (lebih spesifik dulu)
+if(
+    p.includes("profil") || 
+    p.includes("sejarah") ||
+    p === "profil" ||
+    p === "sejarah"
+){
+    return `
+<b>📄 Profil Informasi Fakultas Ilmu Komputer</b><br><br>
+Profil Unit Pengelola Program Studi
+STMIK Prabumulih adalah PTS yang didirikan pada tahun 2000 dengan SK. 
+Mendiknas RI Nomor: 183/D/O/2000 Tanggal 1 September 2000. Bersamaan 
+dengan penetapan izin operasional tersebut, juga ditetapkan izin operasional prodi
+yaitu Sistem Informasi (Strata 1) serta Komputerisasi Akuntansi (Diploma 3). Pada 
+Bulan April Tahun 2022 telah dilakukan penggabungan tiga sekolah tinggi yang 
+salah satunya termasuk STMIK Prabumulih yang selanjutnya disebut sebagai 
+Universitas Prabumulih (UNPRA) berdasarkan SK Kemendikbudristek Nomor: 
+254/E/O/2022 tanggal 7 April 2022.
+Universitas Prabumulih memiliki tiga Fakultas diantaranya Fakultas Ilmu 
+Komputer (Fasilkom) yang menyelenggarakan Prodi Sistem Informasi (Strata 1), 
+Prodi Informatika (Strata 1), dan Prodi Komputerisasi Akuntansi (Diploma 3). Dari 
+hasil penggabungan selanjutnya Prodi Informatika ditetapkan dengan SK Direktur 
+Eksekutif BAN-PT No. 945/SK/BAN-PT/Ak.P/S/III/2023 Tanggal 14 Maret 2023.
+    `;
+}
+
+
+   
+    if(p.includes("halo") || p.includes("hai")){
+        return "Halo juga 👋 ada yang bisa saya bantu?";
+    }
+
+    return `
+Maaf, saya belum memahami 😅<br><br>
+Silakan coba:<br>
+* dosen<br>
+* ukt<br>
+* pendaftaran
+    `;
+}
+
+function pilih(menu){
+    tambah(menu, "user");
+    setTimeout(()=>{ tambah(jawab(menu), "bot"); },500);
+}
+
+function kirim(){
+    let input = document.getElementById("input");
+    let text = input.value;
+
+    if(text === "") return;
+
+    tambah(text, "user");
+    setTimeout(()=>{ tambah(jawab(text), "bot"); },500);
+
+    input.value="";
+}
+</script>
+
+</body>
+</html>
