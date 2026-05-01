@@ -74,7 +74,7 @@ body {
 }
 
 .logo-login {
-    width: 90px;
+    width: 105px;
     margin-bottom: 10px;
 }
 
@@ -352,13 +352,17 @@ body {
     }
 
     .quick{
-        flex-direction: column;
-        align-items: center;
-    }
+    display: flex;
+    flex-direction: row;      /* 🔥 jadi horizontal */
+    overflow-x: auto;         /* 🔥 bisa scroll */
+    gap: 10px;
+    padding: 10px 5px;
+}
 
-    .quick button{
-        width: 90%;
-    }
+.quick button{
+    flex: 0 0 auto;           /* 🔥 biar tidak turun */
+    white-space: nowrap;
+}
 
     @media (max-width: 768px){
 
