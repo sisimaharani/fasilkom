@@ -37,7 +37,7 @@ body {
 }
 
 .logo-robot {
-    width: 100px;
+    width: 200px;
     display: block;
     margin: 0 auto;
 }
@@ -360,17 +360,38 @@ body {
         width: 90%;
     }
 
+    @media (max-width: 768px){
+
     .input-box{
         position: fixed;
         bottom: 10px;
         left: 10px;
         right: 10px;
-        background: transparent;
+
+        display: flex;
+        gap: 10px;
+
+        padding: 10px;
+        background: #eef2ff;
+
+        border-radius: 20px;
+        z-index: 1000;
     }
 
     .chat-box{
-        padding-bottom: 80px;
+        padding-bottom: 120px;
     }
+
+}
+
+.input-box input{
+    flex: 1;
+    min-width: 0;
+}
+
+.input-box button{
+    flex-shrink: 0;
+}
 }
 </style>
 
@@ -381,7 +402,7 @@ body {
 <div id="splash">
     <div class="splash-content">
         <img src="logo unpra.jpeg" class="logo-robot">
-        <h2> Informasi Fakultas Ilmu Komputer Universitas Prabumulih</h2>
+        <h2>Fasilkom Assistant</h2>
         <div class="loader"></div>
     </div>
 </div>
